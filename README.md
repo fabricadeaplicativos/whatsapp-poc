@@ -17,7 +17,7 @@ The full starter kit requires the following major dependencies:
 node --version
 ```
 
-The version should be at or above 0.12.x. And npm **must** be runnable as user not administrator. If npm throws any ``ERR`` messages asking to run as administrator privileges **DO NOT** follow [this tutorial](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md) instead.
+The version should be at or above 0.12.x. And npm **must** be runnable as **user** not administrator. If npm throws any ``ERR`` messages asking to run as administrator privileges **DO NOT**, and follow [this tutorial](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md) instead.
 
 2)  Run this command to install gulp, bower and project dependencies.
 ```sh
