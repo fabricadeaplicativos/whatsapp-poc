@@ -16,8 +16,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Polymer Starter Kit" />
-  <title>Polymer Starter Kit</title>
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <meta name="description" content="Messenger POC">
+  <meta name="author" content="Fabrica de Aplicativos">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Whatsapp POC</title>
+  
+  <!-- Icons -->
+  <link rel="icon" sizes="192x192" href="images/app-icon-192.png">
+  <link rel="icon" sizes="128x128" href="images/app-icon-128.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/app-icon-128.png">
+  <link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/app-icon-128.png">
 
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#303F9F">
@@ -50,6 +60,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="scripts/app.js"></script>
+  <!-- endbuild -->
+
   <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
   <!-- endreplace-->
@@ -71,17 +85,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
               <a data-route="home" href="/">
                 <iron-icon icon="home"></iron-icon>
-                <span>Home</span>
+                <span>Contacts</span>
               </a>
 
               <a data-route="users" href="/users">
                 <iron-icon icon="info"></iron-icon>
-                <span>Users</span>
+                <span>Chat</span>
               </a>
 
               <a data-route="whatsapp" href="/whatsapp">
                 <iron-icon icon="mail"></iron-icon>
-                <span>Whatsapp</span>
+                <span>Profile</span>
               </a>
           </paper-menu>
       </div>
@@ -97,7 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-icon-button icon="search"></paper-icon-button>
 
           <!-- Application name -->
-          <div class="middle paper-font-display2 app-name">Polymer Starter Kit</div>
+          <div class="middle paper-font-display2 app-name">Fábrica Whatsapp POC</div>
 
           <!-- Application sub title -->
           <div class="bottom title"></div>
@@ -109,49 +123,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
             <section data-route="home">
-            <paper-material elevation="1">
-                <paper-tabs selected="0">
-                    <paper-tab>TAB 1</paper-tab>
-                    <paper-tab>TAB 2</paper-tab>
-                    <paper-tab>TAB 3</paper-tab>
-                </paper-tabs>
-                <my-greeting></my-greeting>
-                <my-balz label="check my balz: "></my-balz>
-
-                <p class="paper-font-subhead">You now have:</p>
-                <my-list/>
-                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
-              </paper-material>
               <paper-material elevation="1">
-                <p class="paper-font-body2">This is another card.</p>
-              </paper-material>
-
-              <paper-material elevation="1" class="paper-font-body2">
-                <h1 id="license">License</h1>
-                <p>Everything in this repo is BSD style license unless otherwise specified.</p>
-                <p>Copyright (c) 2015 The Polymer Authors. All rights reserved.</p>
-                <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
-                <ul>
-                <li>Redistributions of source code must retain the above copyright
-                notice, this list of conditions and the following disclaimer.</li>
-                <li>Redistributions in binary form must reproduce the above
-                copyright notice, this list of conditions and the following disclaimer
-                in the documentation and/or other materials provided with the
-                distribution.</li>
-                <li>Neither the name of Google Inc. nor the names of its
-                contributors may be used to endorse or promote products derived from
-                this software without specific prior written permission.</li>
-                </ul>
-                <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+                <paper-toolbar>
+                  <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+                  <div class="title">Contacts</div>
+                  <paper-icon-button icon="more" on-tap="moreAction"></paper-icon-button>
+                </paper-toolbar>
+                <section layout="" vertical="" fit="" id="chat">
+                  <div flex class="chat-list">
+                    <template is="dom-repeat" items="{{contacts}}">
+                      <x-chat-list avatar="{{item.avatar}}" username="{{item.uuid}}" text="{{item.text}}"  status="{{item.status}}" timestamp="{{item.timestamp}}" pending="{{item.pending}}"></x-chat-list>
+                    </template>
+                  </div>
+                </section>
               </paper-material>
 
             </section>
 
             <section data-route="users">
               <paper-material elevation="1">
-                <h2 class="paper-font-display2">Users</h2>
-                <p>This is the users section</p>
-                <a href="/users/Rob">Rob</a>
+              <paper-toolbar>
+                  <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+                  <div class="title">Chat</div>
+                  <paper-icon-button icon="more" on-tap="moreAction"></paper-icon-button>
+                </paper-toolbar>
+                <section layout="" vertical="" fit="" id="chat">
+                  <div flex class="chat-list">
+                    <template is="dom-repeat" items="{{messages}}">
+                      <x-chat-list avatar="{{item.avatar}}" username="{{item.uuid}}" text="{{item.text}}"  status="{{item.status}}" timestamp="{{item.timestamp}}" pending="{{item.pending}}"></x-chat-list>
+                    </template>
+                  </div>
+                </section>
               </paper-material>
             </section>
 
@@ -166,8 +168,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section data-route="whatsapp">
               <paper-material elevation="1">
-                <h2 class="paper-font-display2">Whatsapp</h2>
-                <p>This is the contact section</p>
+
               </paper-material>
             </section>
 
@@ -184,17 +185,3 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
-                          on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="networkFirst"
-                         precache-file="precache.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-
-  </template>
-
-  <!-- build:js scripts/app.js -->
-  <script src="scripts/app.js"></script>
-  <!-- endbuild-->
-</body>
-
-</html>

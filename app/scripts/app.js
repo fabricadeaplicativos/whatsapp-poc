@@ -6,36 +6,83 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
+// MOCK SCRIPT
+window.addEventListener('WebComponentsReady', function() {
 
-(function(document) {
-  'use strict';
-
-  // Grab a reference to our auto-binding template
-  // and give it some initial binding values
-  // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
-  var app = document.querySelector('#app');
-
-  app.displayInstalledToast = function() {
-    document.querySelector('#caching-complete').show();
-  };
-
-  // Listen for template bound event to know when bindings
-  // have resolved and content has been stamped to the page
-  app.addEventListener('dom-change', function() {
-    console.log('Our app is ready to rock!');
-  });
-
-  // See https://github.com/Polymer/polymer/issues/1381
-  window.addEventListener('WebComponentsReady', function() {
-    // imports are loaded and elements have been registered
-  });
-
-  // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onMenuSelect = function() {
-    var drawerPanel = document.querySelector('#paperDrawerPanel');
-    if (drawerPanel.narrow) {
-      drawerPanel.closeDrawer();
+app.contacts = [
+    {
+        "avatar":"images/korat.jpg",
+        "uuid":"Mewster Tamborine",
+        "pending":"10"
+    },
+    {
+        "avatar":"images/japanesebobtail.jpg",
+        "uuid":"Akira",
+        "pending":"56"
+    },
+    {
+        "avatar":"images/ragdoll.jpg",
+        "uuid":"Figurinha",
+    },
+    {
+        "avatar":"images/korat.jpg",
+        "uuid":"Meowster Tamborine",
+        "pending":"2"
+    },
+    {
+        "avatar":"images/siamese.jpg",
+        "uuid":"Frida",
+        "pending":"1"
+    },
+    {
+        "avatar":"images/siamese.jpg",
+        "uuid":"StrayedCatz",
+        "pending":"99+"
     }
-  };
+];
 
-})(document);
+app.messages = [
+    {
+        "avatar":"images/korat.jpg",
+        "uuid":"Meowster Tamborine",
+        "text":"Lick my fur plos.",
+        "status":"online",
+        "timestamp":"2013-11-12T17:14:46.000Z",
+        "pending":"3"
+    },
+    {
+        "avatar":"images/japanesebobtail.jpg",
+        "uuid":"Akira",
+        "text":"Oh nows.",
+        "status":"online",
+        "timestamp":"2013-11-12T17:14:46.000Z",
+        "pending":"3"
+    },
+    {
+        "avatar":"images/ragdoll.jpg",
+        "uuid":"Figurinha",
+        "text":"How grose mewstr",
+        "status":"online",
+        "timestamp":"2013-11-12T17:14:46.000Z",
+        "pending":"3"
+    },
+    {
+        "avatar":"images/korat.jpg",
+        "uuid":"Meowster Tamborine",
+        "text":"PLOS",
+        "status":"online",
+        "timestamp":"2013-11-12T17:14:46.000Z",
+        "pending":"3"
+    },
+    {
+        "avatar":"images/siamese.jpg",
+        "uuid":"Frida",
+        "text":"HUNF",
+        "status":"online",
+        "timestamp":"2013-11-12T17:14:46.000Z",
+        "pending":"3"
+    }
+];
+
+
+});
