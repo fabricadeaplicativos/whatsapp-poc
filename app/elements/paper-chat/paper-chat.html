@@ -1,0 +1,140 @@
+<!--
+A single user list with a username, avatar, and desc.
+
+##### Example
+
+	whospeaks must be 'self' or 'other'
+
+	<paper-chat whospeaks="self" avatar="url" username="name" text="U n me babe aint nothin' but mammmals." timestamp="1420145273945"></paper-contact>
+
+-->
+<dom-module id="paper-chat">
+  
+	<style>
+		.discussion {
+		  list-style: none;
+		  background: #e5e5e5;
+		  margin: 0;
+		  padding: 0 0 50px 0;
+		}
+		.discussion li {
+		  padding: 0.5rem;
+		  overflow: hidden;
+		  display: flex;
+		}
+		.discussion .avatar {
+		  width: 40px;
+		  position: relative;
+		}
+		.discussion .avatar img {
+		  border-radius: 50%;
+		  border: solid 3px silver;
+		  width: 40px;
+		  height: 40px;
+		  margin: 0 16px 0 0;
+		  background: #9e9e9e url(lion.png) center center no-repeat;
+		  background-size: contain;
+		  position: relative;
+		  display: block;
+		  width: 100%;
+		}
+
+		.other .messages {
+		  background: #F2FAFA;
+		  margin-left: 10px;
+		}
+		.other .avatar:after {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  left: 40px;
+		  width: 0;
+		  height: 0;
+		  border: 5px solid #F2FAFA;
+		  border-left-color: transparent;
+		  border-bottom-color: transparent;
+		}
+
+		.self {
+		  justify-content: flex-end;
+		  align-items: flex-end;
+		}
+		.self .messages {
+		  background: white;
+		  order: 1;
+		  border-bottom-right-radius: 0;
+		  margin-right: 6px;
+		}
+		.self .avatar {
+		  order: 2;
+		}
+		.self .avatar:after {
+		  content: "";
+		  position: absolute;
+		  bottom: 0;
+		  right: 36px;
+		  width: 0;
+		  height: 0;
+		  border: 5px solid white;
+		  border-right-color: transparent;
+		  border-top-color: transparent;
+		  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+		}
+
+		.messages {
+		  padding: 10px;
+		  border-radius: 2px;
+		  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+		}
+		.messages p {
+		  font-size: 0.8rem;
+		  margin: 0 0 0.2rem 0;
+		}
+		.messages time {
+		  font-size: 0.7rem;
+		  color: #ccc;
+		}
+
+		@keyframes pulse {
+		  from {
+		    opacity: 0;
+		  }
+		  to {
+		    opacity: 0.5;
+		  }
+		}
+	</style>
+  <template>
+	<section class="chat-messages">
+		<ol class="discussion">
+			<template is="dom-repeat" items="{{messages}}">
+				<li class="other">
+					<div class="avatar">
+						<img src="{{item.avatar}}" />
+					</div>
+					<div class="messages">
+						<p class="name">{{item.username}}</p>
+						<p>{{item.text}}</p>
+						<time is="relative-time" datetime="{{item.timestamp}}"></time>
+					</div>
+				</li>
+			</template>
+		</ol>
+	</section>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'paper-chat',
+      properties: {
+		messages: {
+          type: Array,
+          value: undefined,
+          notify: false,
+        }
+      }
+    });
+  })();
+</script>

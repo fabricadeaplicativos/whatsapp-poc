@@ -9,34 +9,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // MOCK SCRIPT
 window.addEventListener('WebComponentsReady', function() {
 
+app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
+
 app.contacts = [
     {
         "avatar":"images/korat.jpg",
         "uuid":"Mewster Tamborine",
+        "text":"mew maw mee pur",
         "pending":"10"
     },
     {
         "avatar":"images/japanesebobtail.jpg",
         "uuid":"Akira",
+        "text":"-= milk =-",
         "pending":"56"
     },
     {
         "avatar":"images/ragdoll.jpg",
         "uuid":"Figurinha",
+        "text":"Cant touch me",
     },
     {
         "avatar":"images/korat.jpg",
         "uuid":"Meowster Tamborine",
+        "text":"Vida loca jão BD",
         "pending":"2"
     },
     {
         "avatar":"images/siamese.jpg",
         "uuid":"Frida",
+        "text":"Lick my fur plos u_u",
         "pending":"1"
     },
     {
         "avatar":"images/siamese.jpg",
         "uuid":"StrayedCatz",
+        "text":"Bad catz group :D",
         "pending":"99+"
     }
 ];
@@ -44,43 +52,37 @@ app.contacts = [
 app.messages = [
     {
         "avatar":"images/korat.jpg",
-        "uuid":"Meowster Tamborine",
+        "username":"Meowster Tamborine",
         "text":"Lick my fur plos.",
-        "status":"online",
         "timestamp":"2013-11-12T17:14:46.000Z",
-        "pending":"3"
+        "whospeaks":"other"
     },
     {
-        "avatar":"images/japanesebobtail.jpg",
-        "uuid":"Akira",
+        "username":"Akira",
         "text":"Oh nows.",
-        "status":"online",
         "timestamp":"2013-11-12T17:14:46.000Z",
-        "pending":"3"
+        "whospeaks":"other"
     },
     {
         "avatar":"images/ragdoll.jpg",
-        "uuid":"Figurinha",
-        "text":"How grose mewstr",
-        "status":"online",
+        "username":"Milk",
+        "text":"**is playing with a string and can't chat right now**",
         "timestamp":"2013-11-12T17:14:46.000Z",
-        "pending":"3"
+        "whospeaks":"other"
     },
     {
         "avatar":"images/korat.jpg",
-        "uuid":"Meowster Tamborine",
-        "text":"PLOS",
-        "status":"online",
+        "username":"Frida Calo",
+        "text":"Nevur mewstr",
         "timestamp":"2013-11-12T17:14:46.000Z",
-        "pending":"3"
+        "whospeaks":"self"
     },
     {
         "avatar":"images/siamese.jpg",
-        "uuid":"Frida",
-        "text":"HUNF",
-        "status":"online",
+        "username":"Ms Paws",
+        "text":"aosjdpjap pojpoadj j i jdijdow.",
         "timestamp":"2013-11-12T17:14:46.000Z",
-        "pending":"3"
+        "whospeaks":"other"
     }
 ];
 

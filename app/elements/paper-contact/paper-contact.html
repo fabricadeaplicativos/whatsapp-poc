@@ -1,0 +1,130 @@
+<!--
+A single user list with a username, avatar, and desc.
+
+##### Example
+
+	<paper-contact avatar="url" username="name" statusmsg="hello" status="online" pending="5"></paper-contact>
+
+-->
+<dom-module id="paper-contact">
+  
+	<style>
+		:host {
+			display: block;
+	        position: relative;
+			width: 100%;
+			border-bottom: 1px solid #e0e0e0;
+	        font-size: 16px;
+	        min-height: 72px;
+	        z-index: 0;
+		}
+		.contact {
+			padding: 16px;
+		}
+		.avatar {
+			border-radius: 50%;
+			border: solid 3px silver;
+			width: 40px;
+			height: 40px;
+	  		margin: 0 16px 0 0;
+			background: #9e9e9e url(lion.png) center center no-repeat;
+			background-size: contain;
+			position: relative;
+		}
+		.status {
+			position: absolute;
+			bottom: -3px;
+			right: -3px;
+			border-radius: 50%;
+			width: 14px;
+			height: 14px;
+			background-color: #7EDF25;
+			display: none;
+		}
+		.status.online {
+			display: block;
+		}
+		.pending {
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+	  		margin: 0 2px 0 0;
+	  		float: right;
+			background: #C7D2FF center center no-repeat;
+			background-size: contain;
+			position: relative;
+			font-size: 0.75em;
+			color: #919191;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 25px;
+		}
+		.username {
+			text-transform: capitalize;
+			font-weight: 500;
+			color: #919191;
+			line-height: 1.3em;
+			max-width: 90%;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.text {
+			color: #B8B8B8;
+			font-size: 0.8em;
+			max-width: 90%;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+	</style>
+  <template>
+	<section class="contact" layout horizontal>
+		<div class="avatar" style$="{{setAvatar(avatar)}}">
+			<div class$="{{setStatus(status)}}"></div>
+		</div>
+		<div class="pending">{{pending}}</div>
+		<div flex>
+			<div class="username">{{username}}</div>
+			<div class="text">{{statusmsg}}</div>
+		</div>
+		<content></content>
+	</section>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'paper-contact',
+      properties: {
+		avatar: {
+          type: String,
+          value: "",
+          notify: false,
+        },
+		username: {
+          type: String,
+          value: "",
+          notify: false,
+        },
+		statusmsg: {
+          type: String,
+          value: "",
+          notify: false,
+        },
+		status: {
+          type: String,
+          value: "offline",
+          notify: true,
+        },
+		pending: {
+          type: String,
+          value: "",
+          notify: true,
+        }
+      },
+      setAvatar: function(avatar) {return 'background-image: url( '+ avatar + ')';},
+	  setStatus: function(status) {return 'status '+ status;}
+    });
+  })();
+</script>

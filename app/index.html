@@ -60,10 +60,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="scripts/app.js"></script>
-  <!-- endbuild -->
-
   <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
   <!-- endreplace-->
@@ -122,48 +118,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
+          <!-- CONTACTS LIST -->
             <section data-route="home">
               <paper-material elevation="1">
+
                 <paper-toolbar>
                   <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
                   <div class="title">Contacts</div>
                   <paper-icon-button icon="more" on-tap="moreAction"></paper-icon-button>
                 </paper-toolbar>
-                <section layout="" vertical="" fit="" id="chat">
-                  <div flex class="chat-list">
-                    <template is="dom-repeat" items="{{contacts}}">
-                      <x-chat-list avatar="{{item.avatar}}" username="{{item.uuid}}" text="{{item.text}}"  status="{{item.status}}" timestamp="{{item.timestamp}}" pending="{{item.pending}}"></x-chat-list>
-                    </template>
-                  </div>
-                </section>
-              </paper-material>
 
+                
+                <div flex class="contact-list">
+                  <template is="dom-repeat" items="{{contacts}}">
+                    <a data-route="chat" href="{{getChatURL(item.uuid)}}">
+                      <paper-contact avatar="{{item.avatar}}" username="{{item.uuid}}" statusmsg="{{item.text}}"  status="{{item.status}}" timestamp="{{item.timestamp}}" pending="{{item.pending}}">
+                        <paper-ripple/>
+                      </paper-contact>
+                    </a>
+                  </template>
+                </div>
+
+              </paper-material>
             </section>
 
-            <section data-route="users">
-              <paper-material elevation="1">
-              <paper-toolbar>
-                  <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-                  <div class="title">Chat</div>
+          <!-- CHAT LIST -->
+            <section data-route="chat">
+
+                <paper-toolbar>
+                  <a data-route="home" href="/">
+                    <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+                  </a>
+                  <div class="title">{{params.contact}}</div>
                   <paper-icon-button icon="more" on-tap="moreAction"></paper-icon-button>
                 </paper-toolbar>
-                <section layout="" vertical="" fit="" id="chat">
-                  <div flex class="chat-list">
-                    <template is="dom-repeat" items="{{messages}}">
-                      <x-chat-list avatar="{{item.avatar}}" username="{{item.uuid}}" text="{{item.text}}"  status="{{item.status}}" timestamp="{{item.timestamp}}" pending="{{item.pending}}"></x-chat-list>
-                    </template>
-                  </div>
-                </section>
-              </paper-material>
-            </section>
 
-            <section data-route="user-info">
-              <paper-material elevation="1">
-                <h2 class="paper-font-display2">
-                User:<span>{{params.name}}</span>
-                </h2>
-                <div>This is <span>{{params.name}}</span>'s section</div>
-              </paper-material>
+                
+                <div flex class="chat-list">
+                  <paper-chat messages="{{messages}}" />
+                </div>
+
             </section>
 
             <section data-route="whatsapp">
@@ -177,11 +171,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-header-panel>
     </paper-drawer-panel>
 
+    <!-- Uncomment next block to enable Service Worker support (1/2) -->
+    <!--
     <paper-toast id="caching-complete"
                  duration="6000"
                  text="Caching complete! This app will work offline.">
     </paper-toast>
-
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
+                          on-service-worker-installed="displayInstalledToast">
+      <platinum-sw-cache default-cache-strategy="networkFirst"
+                         precache-file="precache.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+    -->
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>
