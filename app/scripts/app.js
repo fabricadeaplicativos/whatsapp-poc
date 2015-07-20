@@ -11,80 +11,126 @@ window.addEventListener('WebComponentsReady', function() {
 
 app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
 
+
 app.contacts = [
     {
-        "avatar":"images/korat.jpg",
+        "avatar":"/images/korat.jpg",
         "uuid":"Mewster Tamborine",
         "text":"mew maw mee pur",
         "pending":"10"
     },
     {
-        "avatar":"images/japanesebobtail.jpg",
+        "avatar":"/images/japanesebobtail.jpg",
         "uuid":"Akira",
         "text":"-= milk =-",
         "pending":"56"
     },
     {
-        "avatar":"images/ragdoll.jpg",
+        "avatar":"/images/ragdoll.jpg",
         "uuid":"Figurinha",
         "text":"Cant touch me",
     },
     {
-        "avatar":"images/korat.jpg",
-        "uuid":"Meowster Tamborine",
-        "text":"Vida loca jão BD",
-        "pending":"2"
-    },
-    {
-        "avatar":"images/siamese.jpg",
-        "uuid":"Frida",
-        "text":"Lick my fur plos u_u",
-        "pending":"1"
-    },
-    {
-        "avatar":"images/siamese.jpg",
+        "avatar":"/images/siamese.jpg",
         "uuid":"StrayedCatz",
         "text":"Bad catz group :D",
         "pending":"99+"
     }
 ];
 
-app.messages = [
-    {
-        "avatar":"images/korat.jpg",
-        "username":"Meowster Tamborine",
-        "text":"Lick my fur plos.",
-        "timestamp":"2013-11-12T17:14:46.000Z",
-        "whospeaks":"other"
-    },
-    {
-        "username":"Akira",
-        "text":"Oh nows.",
-        "timestamp":"2013-11-12T17:14:46.000Z",
-        "whospeaks":"other"
-    },
-    {
-        "avatar":"images/ragdoll.jpg",
-        "username":"Milk",
-        "text":"**is playing with a string and can't chat right now**",
-        "timestamp":"2013-11-12T17:14:46.000Z",
-        "whospeaks":"other"
-    },
-    {
-        "avatar":"images/korat.jpg",
-        "username":"Frida Calo",
-        "text":"Nevur mewstr",
-        "timestamp":"2013-11-12T17:14:46.000Z",
-        "whospeaks":"self"
-    },
-    {
-        "avatar":"images/siamese.jpg",
-        "username":"Ms Paws",
-        "text":"aosjdpjap pojpoadj j i jdijdow.",
-        "timestamp":"2013-11-12T17:14:46.000Z",
-        "whospeaks":"other"
-    }
-];
+app.msgs = {
+    "StrayedCatz":[
+        {
+            "avatar":"/images/korat.jpg",
+            "username":"Meowster Tamborine",
+            "text":"Lick my fur plos.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "avatar":"/images/japanesebobtail.jpg",
+            "username":"Akira",
+            "text":"Oh nows.",
+            "timestamp":"2013-11-12T17:14:50.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "avatar":"/images/ragdoll.jpg",
+            "username":"Milk",
+            "text":"**is playing with a string and can't chat right now**",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "avatar":"/images/korat.jpg",
+            "username":"Frida Calo",
+            "text":"Nevur mewstr",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        },
+        {
+            "avatar":"/images/siamese.jpg",
+            "username":"Ms Paws",
+            "text":"aosjdpjap pojpoadj j i jdijdow.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        }
+    ],
+    "Mewster Tamborine":[
+        {
+            "text":"Lick my fur plos.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "text":"Oh nows.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        },
+        {
+            "text":"**is playing with a string and can't chat right now**",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "text":"Nevur mewstr",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        },
+        {
+            "text":"aosjdpjap pojpoadj j i jdijdow.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        }
+    ],
+    "Figurinha":[
+        {
+            "text":"Lick my fur plos.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        },
+        {
+            "text":"Oh nows.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        },
+        {
+            "text":"**is playing with a string and can't chat right now**",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "text":"Nevur mewstr",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"other"
+        },
+        {
+            "text":"aosjdpjap pojpoadj j i jdijdow.",
+            "timestamp":"2013-11-12T17:14:46.000Z",
+            "whospeaks":"self"
+        }
+    ]
+};
 
 
 });

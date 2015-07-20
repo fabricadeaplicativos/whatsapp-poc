@@ -27,7 +27,7 @@ A single user list with a username, avatar, and desc.
 			width: 40px;
 			height: 40px;
 	  		margin: 0 16px 0 0;
-			background: #9e9e9e url(lion.png) center center no-repeat;
+			background: #9e9e9e gray center center no-repeat;
 			background-size: contain;
 			position: relative;
 		}
@@ -83,7 +83,7 @@ A single user list with a username, avatar, and desc.
 		<div class="avatar" style$="{{setAvatar(avatar)}}">
 			<div class$="{{setStatus(status)}}"></div>
 		</div>
-		<div class="pending">{{pending}}</div>
+		<div class$="{{setPendingClass(pending)}}">{{pending}}</div>
 		<div flex>
 			<div class="username">{{username}}</div>
 			<div class="text">{{statusmsg}}</div>
@@ -124,7 +124,8 @@ A single user list with a username, avatar, and desc.
         }
       },
       setAvatar: function(avatar) {return 'background-image: url( '+ avatar + ')';},
-	  setStatus: function(status) {return 'status '+ status;}
-    });
+	  setStatus: function(status) {return 'status '+ status;},
+	  setPendingClass: function(pending) {if(pending != undefined){return 'pending'}else{return '';}}
+	});
   })();
 </script>

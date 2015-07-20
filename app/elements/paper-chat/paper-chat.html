@@ -8,6 +8,8 @@ A single user list with a username, avatar, and desc.
 	<paper-chat whospeaks="self" avatar="url" username="name" text="U n me babe aint nothin' but mammmals." timestamp="1420145273945"></paper-contact>
 
 -->
+
+<script src="../../bower_components/time-elements/time-elements.js"></script>
 <dom-module id="paper-chat">
   
 	<style>
@@ -32,7 +34,7 @@ A single user list with a username, avatar, and desc.
 		  width: 40px;
 		  height: 40px;
 		  margin: 0 16px 0 0;
-		  background: #9e9e9e url(lion.png) center center no-repeat;
+		  background: #9e9e9e gray center center no-repeat;
 		  background-size: contain;
 		  position: relative;
 		  display: block;
@@ -95,6 +97,13 @@ A single user list with a username, avatar, and desc.
 		  font-size: 0.7rem;
 		  color: #ccc;
 		}
+		.username {
+			text-transform: capitalize;
+			font-weight: 500;
+			color: #919191;
+			line-height: 1.3em;
+			white-space: nowrap;
+		}
 
 		@keyframes pulse {
 		  from {
@@ -107,16 +116,17 @@ A single user list with a username, avatar, and desc.
 	</style>
   <template>
 	<section class="chat-messages">
+
 		<ol class="discussion">
-			<template is="dom-repeat" items="{{messages}}">
-				<li class="other">
-					<div class="avatar">
-						<img src="{{item.avatar}}" />
+			<template is="dom-repeat" items$="{{getMsgs(user)}}">
+				<li class$="{{item.whospeaks}}">
+					<div class$="{{setAvatarClass(item.avatar)}}">
+						<img src="{{setAvatar(item.avatar)}}" />
 					</div>
 					<div class="messages">
-						<p class="name">{{item.username}}</p>
+						<p class="username">{{item.username}}</p>
 						<p>{{item.text}}</p>
-						<time is="relative-time" datetime="{{item.timestamp}}"></time>
+						<time is="relative-time" datetime$="{{item.timestamp}}"></time>
 					</div>
 				</li>
 			</template>
@@ -129,12 +139,15 @@ A single user list with a username, avatar, and desc.
     Polymer({
       is: 'paper-chat',
       properties: {
-		messages: {
-          type: Array,
+		user: {
+          type: String,
           value: undefined,
           notify: false,
         }
-      }
+      },
+      setAvatarClass: function(avatar) {if(avatar != undefined){return 'avatar';}else{return '';}},
+      setAvatar: function(avatar) {if(avatar != undefined){return avatar;}else{return '';}},
+      getMsgs: function(user) {return app.msgs[this.user];}
     });
   })();
 </script>
