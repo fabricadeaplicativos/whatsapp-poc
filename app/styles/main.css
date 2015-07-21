@@ -27,16 +27,6 @@ a:hover {
 a:active {
     text-decoration: none;
 }
-.list {
-  padding-top: 12px;
-  background-color: white;
-  display: inline-block;
-  width: 240px;
-  height: 228px;
-  margin: 12px;
-  @apply(--shadow-elevation-2dp);
-}
-
 .short {
   padding-top: 12px;
   height: 216px;
@@ -44,34 +34,6 @@ a:active {
 
 h4 {
   margin-left: 24px;
-}
-.contact-list {
-    overflow-y: scroll;
-    padding-bottom: 16px;
-}
-.send-message {
-    padding: 0 16px 6px 16px;
-}
-.shim {
-    position: fixed;
-    bottom: 54px;
-    left: 0;
-    right: 0;
-    height: 36px;
-    background: linear-gradient(rgba(255,255,255,0), #eee 80%) top center no-repeat;
-}
-.occupancy {
-    padding: 16px;
-}
-.subdue, .subdue /deep/ div {
-    color: #999;
-}
-
-/* Drawer */
-
-#onlineList {
-    margin: 16px;
-    text-transform: capitalize;
 }
 
 ::content > .avatar {

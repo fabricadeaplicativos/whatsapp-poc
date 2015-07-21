@@ -101,7 +101,7 @@ A single user list with a username, avatar, and desc.
 			text-transform: capitalize;
 			font-weight: 500;
 			color: #919191;
-			line-height: 1.3em;
+			line-height: 1.3em;	
 			white-space: nowrap;
 		}
 
@@ -113,9 +113,21 @@ A single user list with a username, avatar, and desc.
 		    opacity: 0.5;
 		  }
 		}
+		paper-input /deep/ .focused-underline {
+		    background-color: #ce1126;
+		}
+		.chat-messages {
+		    overflow-y: scroll;
+		    padding-bottom: 16px;
+		    height: 100%;
+		}
+		.send-message {
+		    padding: 0 16px 6px 16px;
+		    background: #e5e5e5;
+		}
 	</style>
   <template>
-	<section class="chat-messages">
+	<section class="chat-messages" layout vertical fit>
 
 		<ol class="discussion">
 			<template is="dom-repeat" items$="{{getMsgs(user)}}">
@@ -130,7 +142,12 @@ A single user list with a username, avatar, and desc.
 					</div>
 				</li>
 			</template>
+
+			<div class="send-message">
+	    		<paper-input flex label="Type message..." value="{{txt}}" on-keyup="checkKey"></paper-input>
+	    	</div>	
 		</ol>
+
 	</section>
   </template>
 </dom-module>
@@ -147,7 +164,10 @@ A single user list with a username, avatar, and desc.
       },
       setAvatarClass: function(avatar) {if(avatar != undefined){return 'avatar';}else{return '';}},
       setAvatar: function(avatar) {if(avatar != undefined){return avatar;}else{return '';}},
-      getMsgs: function(user) {return app.msgs[this.user];}
+      getMsgs: function(user) {return app.msgs[this.user];},
+      send: function() {console.log("user: " + this.txt);},
+      checkKey: function(e) {if(e.keyCode === 13 || e.charCode === 13){this.send();}}
+
     });
   })();
 </script>
