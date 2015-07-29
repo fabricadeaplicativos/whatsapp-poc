@@ -39,6 +39,17 @@ h4 {
 ::content > .avatar {
     margin: 0; /* override */
 }
+.discussion {
+  list-style: none;
+  background: #e5e5e5;
+  margin: 0;
+  padding: 0 0 50px 0;
+}
+
+.send-message {
+    padding: 0 16px 6px 16px;
+    background: #e5e5e5;
+}
 #navheader {
     background: url(/images/abstract-21664.jpg) top left no-repeat;
 }

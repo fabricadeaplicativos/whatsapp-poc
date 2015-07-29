@@ -22,6 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page('/chat/:contact', function (data) {
       app.route = 'chat';
       app.params = data.params;
+      app.selected = app.msgs[app.params.contact];
     });
 
     page('/whatsapp', function () {

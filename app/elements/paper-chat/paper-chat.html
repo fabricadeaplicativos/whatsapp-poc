@@ -13,22 +13,22 @@ A single user list with a username, avatar, and desc.
 <dom-module id="paper-chat">
   
 	<style>
-		.discussion {
+		:host {
 		  list-style: none;
 		  background: #e5e5e5;
 		  margin: 0;
 		  padding: 0 0 50px 0;
 		}
-		.discussion li {
+		li {
 		  padding: 0.5rem;
 		  overflow: hidden;
 		  display: flex;
 		}
-		.discussion .avatar {
+		.avatar {
 		  width: 40px;
 		  position: relative;
 		}
-		.discussion .avatar img {
+		.avatar img {
 		  border-radius: 50%;
 		  border: solid 3px silver;
 		  width: 40px;
@@ -121,33 +121,19 @@ A single user list with a username, avatar, and desc.
 		    padding-bottom: 16px;
 		    height: 100%;
 		}
-		.send-message {
-		    padding: 0 16px 6px 16px;
-		    background: #e5e5e5;
-		}
 	</style>
   <template>
 	<section class="chat-messages" layout vertical fit>
-
-		<ol class="discussion">
-			<template is="dom-repeat" items$="{{getMsgs(user)}}">
-				<li class$="{{item.whospeaks}}">
-					<div class$="{{setAvatarClass(item.avatar)}}">
-						<img src="{{setAvatar(item.avatar)}}" />
-					</div>
-					<div class="messages">
-						<p class="username">{{item.username}}</p>
-						<p>{{item.text}}</p>
-						<time is="relative-time" datetime$="{{item.timestamp}}"></time>
-					</div>
-				</li>
-			</template>
-
-			<div class="send-message">
-	    		<paper-input flex label="Type message..." value="{{txt}}" on-keyup="checkKey"></paper-input>
-	    	</div>	
-		</ol>
-
+		<li class$="{{whospeaks}}">
+			<div class$="{{setAvatarClass(avatar)}}">
+				<img src="{{setAvatar(avatar)}}" />
+			</div>
+			<div class="messages">
+				<p class="username">{{username}}</p>
+				<p>{{text}}</p>
+				<time is="relative-time" datetime$="{{timestamp}}"></time>
+			</div>
+		</li>
 	</section>
   </template>
 </dom-module>
@@ -155,19 +141,35 @@ A single user list with a username, avatar, and desc.
   (function () {
     Polymer({
       is: 'paper-chat',
+      setAvatarClass: function(avatar) {if(avatar != undefined){return 'avatar';}else{return '';}},
+      setAvatar: function(avatar) {if(avatar != undefined){return avatar;}else{return '';}},
       properties: {
-		user: {
+		whospeaks: {
+          type: String,
+          value: undefined,
+          notify: false,
+        },
+        avatar: {
+          type: String,
+          value: undefined,
+          notify: false,
+        },
+        username: {
+          type: String,
+          value: undefined,
+          notify: false,
+        },
+        text: {
+          type: String,
+          value: undefined,
+          notify: false,
+        },
+        timestamp: {
           type: String,
           value: undefined,
           notify: false,
         }
-      },
-      setAvatarClass: function(avatar) {if(avatar != undefined){return 'avatar';}else{return '';}},
-      setAvatar: function(avatar) {if(avatar != undefined){return avatar;}else{return '';}},
-      getMsgs: function(user) {return app.msgs[this.user];},
-      send: function() {console.log("user: " + this.txt);},
-      checkKey: function(e) {if(e.keyCode === 13 || e.charCode === 13){this.send();}}
-
+      }	
     });
   })();
 </script>

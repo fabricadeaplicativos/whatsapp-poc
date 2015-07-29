@@ -9,7 +9,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // MOCK SCRIPT
 window.addEventListener('WebComponentsReady', function() {
 
-app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
+
+    app.selected = [];
+    app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
+    app.checkKey = function(e) {if(e.keyCode === 13 || e.charCode === 13){this.send();}};
+    app.send = function() {
+        app.selected.push();
+        var template = document.querySelector("#msglist");
+        template.push('items', {
+            text: this.txt,
+            timestamp: new Date().toISOString(),
+            whospeaks: "self"
+        });
+        this.txt="";
+    };
+
 
     app.contacts = [
         {
@@ -100,6 +114,31 @@ app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
                 "text":"aosjdpjap pojpoadj j i jdijdow.",
                 "timestamp":"2013-11-12T17:14:46.000Z",
                 "whospeaks":"self"
+            },
+                        {
+                "text":"Lick my fur plos.",
+                "timestamp":"2013-11-12T17:14:46.000Z",
+                "whospeaks":"other"
+            },
+            {
+                "text":"Oh nows.",
+                "timestamp":"2013-11-12T17:14:46.000Z",
+                "whospeaks":"self"
+            },
+            {
+                "text":"**is playing with a string and can't chat right now**",
+                "timestamp":"2013-11-12T17:14:46.000Z",
+                "whospeaks":"other"
+            },
+            {
+                "text":"Nevur mewstr",
+                "timestamp":"2013-11-12T17:14:46.000Z",
+                "whospeaks":"self"
+            },
+            {
+                "text":"aosjdpjap pojpoadj j i jdijdow.",
+                "timestamp":"2013-11-12T17:14:46.000Z",
+                "whospeaks":"self"
             }
         ],
         "Figurinha":[
@@ -131,43 +170,5 @@ app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
         ]
     };
 
- /*   var template = document.querySelector('template[is=auto-binding]');
-
-    template.uuid = 169;
-    template.username = "Paul";
-    template.avatar = "/images/ragdoll.jpg";
-    template.messageList = app.msgs;
-    template.contacts = app.contacts;
-
-
-
-    template.checkKey = function(e) {
-        if(e.keyCode === 13 || e.charCode === 13) {
-            template.publish();
-        }
-    };
-
-    template.displayChatList = function(list) {
-        template.messageList = list;
-        // scroll to bottom when all list items are displayed
-        template.async(showNewest);
-    };
-
-    template.publish = function() {
-        if(!template.input) return;
-
-        message = {
-            uuid: uuid,
-            avatar: avatar,
-            text: template.input,
-            timestamp: new Date().toISOString()
-        };
-        template.$.pub.publish();
-        template.input = '';
-    };
-
-    template.error = function(e) {
-        console.log(e);
-    };*/
 
 });

@@ -105,7 +105,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 
                 <div flex class="chat-list">
-                  <paper-chat user="{{params.contact}}" />
+                  <ol class="discussion">
+                    <template id="msglist" is="dom-repeat" items="{{selected}}">
+                      <paper-chat whospeaks="[[item.whospeaks]]" avatar="[[item.avatar]]" username="[[item.username]]" text="[[item.text]]" timestamp="[[item.timestamp]]"/>
+                    </template>
+                    <div class="send-message">
+                      <paper-input flex label="Type message..." value="{{txt}}" on-keyup="checkKey"></paper-input>
+                    </div>
+                  </ol>
                 </div>
 
             </section>
