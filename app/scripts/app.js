@@ -12,7 +12,7 @@ window.addEventListener('WebComponentsReady', function() {
     app.contacts = [];
     app.msgs = {};
     app.selected = [];
-    app.username = function(){ 
+    app.getUsername = function(){ 
         var username = prompt("Please enter your name");
         if(username != null){
             var contact = {
@@ -24,15 +24,16 @@ window.addEventListener('WebComponentsReady', function() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("POST", "http://127.0.0.1:5555/contact", true);
             xmlhttp.send(JSON.stringify(contact));
+            app.username = username;
         }
     };
-    app.username();
+    app.getUsername();
     app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
     app.checkKey = function(e) {if(e.keyCode === 13 || e.charCode === 13){this.send();}};
     app.send = function() {
         var msg = {
                 "avatar":"/images/siamese.jpg",
-                "username": this.username,
+                "username": app.username,
                 "text": this.txt,
                 "timestamp":"2013-11-12T17:14:46.000Z",
                 "whospeaks":"self"
@@ -53,7 +54,7 @@ window.addEventListener('WebComponentsReady', function() {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function(){
                   if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                    var template = document.querySelector("#msglist");
+                    var template = document.querySelector("#msgList");
                     for (msg in JSON.parse(xmlhttp.responseText)){
                         template.push('items', msg);
                     }
@@ -69,12 +70,12 @@ window.addEventListener('WebComponentsReady', function() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function(){
               if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                var template = document.querySelector("#contactlist");
-                app.contacts = JSON.parse(xmlhttp.responseText);
-                app.contacts.forEach(function(contact){
+                var contacts = JSON.parse(xmlhttp.responseText);
+                contacts.forEach(function(contact){
                     contact = JSON.parse(contact);
                     if(!(contact.uuid in app.msgs)){
                         app.msgs[contact.uuid] = [];
+                        var template = document.querySelector("#contactList");
                         template.push('items', contact);
                     }
                 });
