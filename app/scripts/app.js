@@ -9,166 +9,79 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // MOCK SCRIPT
 window.addEventListener('WebComponentsReady', function() {
 
-
+    app.contacts = [];
+    app.msgs = {};
     app.selected = [];
+    app.username = function(){ 
+        var username = prompt("Please enter your name");
+        if(username != null){
+            var contact = {
+            "avatar":"/images/korat.jpg",
+            "uuid": username,
+            "text": "mew maw mee pur",
+            "pending":"10"
+        };
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "http://127.0.0.1:5555/contact", true);
+            xmlhttp.send(JSON.stringify(contact));
+        }
+    };
+    app.username();
     app.getChatURL = function(uuid) {return '/chat/'+ uuid;};
     app.checkKey = function(e) {if(e.keyCode === 13 || e.charCode === 13){this.send();}};
     app.send = function() {
-        app.selected.push();
+        var msg = {
+                "avatar":"/images/siamese.jpg",
+                "username": this.username,
+                "text": this.txt,
+                "timestamp":"2013-11-12T17:14:46.000Z",
+                "whospeaks":"self"
+            };
         var template = document.querySelector("#msglist");
-        template.push('items', {
-            text: this.txt,
-            timestamp: new Date().toISOString(),
-            whospeaks: "self"
-        });
+        template.push('items', msg);
+        var msg1 = JSON.parse(JSON.stringify(msg));
+        msg.whospeaks = "other";
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "http://127.0.0.1:5555/message/" + this.params.contact, true);
+        xmlhttp.send(JSON.stringify(msg1));
         this.txt="";
     };
-
-
-    app.contacts = [
-        {
-            "avatar":"/images/korat.jpg",
-            "uuid":"Mewster Tamborine",
-            "text":"mew maw mee pur",
-            "pending":"10"
-        },
-        {
-            "avatar":"/images/japanesebobtail.jpg",
-            "uuid":"Akira",
-            "text":"-= milk =-",
-            "pending":"56"
-        },
-        {
-            "avatar":"/images/ragdoll.jpg",
-            "uuid":"Figurinha",
-            "text":"Cant touch me",
-        },
-        {
-            "avatar":"/images/siamese.jpg",
-            "uuid":"StrayedCatz",
-            "text":"Bad catz group :D",
-            "pending":"99+"
-        }
-    ];
-
-    app.msgs = {
-        "StrayedCatz":[
-            {
-                "avatar":"/images/korat.jpg",
-                "username":"Meowster Tamborine",
-                "text":"Lick my fur plos.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "avatar":"/images/japanesebobtail.jpg",
-                "username":"Akira",
-                "text":"Oh nows.",
-                "timestamp":"2013-11-12T17:14:50.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "avatar":"/images/ragdoll.jpg",
-                "username":"Milk",
-                "text":"**is playing with a string and can't chat right now**",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "avatar":"/images/korat.jpg",
-                "username":"Frida Calo",
-                "text":"Nevur mewstr",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "avatar":"/images/siamese.jpg",
-                "username":"Ms Paws",
-                "text":"aosjdpjap pojpoadj j i jdijdow.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
+    
+    setInterval(
+        function () {
+            if(this.params){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                  if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    var template = document.querySelector("#msglist");
+                    for (msg in JSON.parse(xmlhttp.responseText)){
+                        template.push('items', msg);
+                    }
+                  }
+                }
+                xmlhttp.open("GET", "http://127.0.0.1:5555/message/" + this.params.contact, true);
+                xmlhttp.send();
             }
-        ],
-        "Mewster Tamborine":[
-            {
-                "text":"Lick my fur plos.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "text":"Oh nows.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "text":"**is playing with a string and can't chat right now**",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "text":"Nevur mewstr",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "text":"aosjdpjap pojpoadj j i jdijdow.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-                        {
-                "text":"Lick my fur plos.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "text":"Oh nows.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "text":"**is playing with a string and can't chat right now**",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "text":"Nevur mewstr",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "text":"aosjdpjap pojpoadj j i jdijdow.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            }
-        ],
-        "Figurinha":[
-            {
-                "text":"Lick my fur plos.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "text":"Oh nows.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            },
-            {
-                "text":"**is playing with a string and can't chat right now**",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "text":"Nevur mewstr",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"other"
-            },
-            {
-                "text":"aosjdpjap pojpoadj j i jdijdow.",
-                "timestamp":"2013-11-12T17:14:46.000Z",
-                "whospeaks":"self"
-            }
-        ]
-    };
+    }, 500);
 
+    setInterval(
+        function () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+              if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                var template = document.querySelector("#contactlist");
+                app.contacts = JSON.parse(xmlhttp.responseText);
+                app.contacts.forEach(function(contact){
+                    contact = JSON.parse(contact);
+                    if(!(contact.uuid in app.msgs)){
+                        app.msgs[contact.uuid] = [];
+                        template.push('items', contact);
+                    }
+                });
+              }
+            }
+            xmlhttp.open("GET", "http://127.0.0.1:5555/contact", true);
+            xmlhttp.send();
+    }, 3000);
 
 });

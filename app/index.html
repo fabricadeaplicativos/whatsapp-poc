@@ -82,7 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 
                 <div flex class="contact-list">
-                  <template is="dom-repeat" items="{{contacts}}">
+                  <template id="contactList" is="dom-repeat" items="{{contacts}}">
                     <a data-route="chat" href="{{getChatURL(item.uuid)}}">
                       <paper-contact avatar="{{item.avatar}}" username="{{item.uuid}}" statusmsg="{{item.text}}"  status="{{item.status}}" timestamp="{{item.timestamp}}" pending="{{item.pending}}">
                         <paper-ripple/>
