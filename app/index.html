@@ -106,7 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 
                 <div flex class="chat-list">
                   <ol class="discussion">
-                    <template id="msglist" is="dom-repeat" items="{{selected}}">
+                    <template id="msgList" is="dom-repeat" items="{{selected}}">
                       <paper-chat whospeaks="[[item.whospeaks]]" avatar="[[item.avatar]]" username="[[item.username]]" text="[[item.text]]" timestamp="[[item.timestamp]]"/>
                     </template>
                     <div class="send-message">

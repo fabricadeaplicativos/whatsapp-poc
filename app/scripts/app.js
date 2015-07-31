@@ -38,7 +38,7 @@ window.addEventListener('WebComponentsReady', function() {
                 "timestamp":"2013-11-12T17:14:46.000Z",
                 "whospeaks":"self"
             };
-        var template = document.querySelector("#msglist");
+        var template = document.querySelector("#msgList");
         template.push('items', msg);
         var msg1 = JSON.parse(JSON.stringify(msg));
         msg.whospeaks = "other";
@@ -50,20 +50,22 @@ window.addEventListener('WebComponentsReady', function() {
     
     setInterval(
         function () {
-            if(this.params){
+            if(app.params){
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function(){
                   if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                    var template = document.querySelector("#msgList");
-                    for (msg in JSON.parse(xmlhttp.responseText)){
+                    var msgs = JSON.parse(xmlhttp.responseText);
+                    msgs.forEach(function(msg){
+                        var msg = JSON.parse(msg);
+                        var template = document.querySelector("#msgList");
                         template.push('items', msg);
-                    }
+                    });
                   }
                 }
-                xmlhttp.open("GET", "http://127.0.0.1:5555/message/" + this.params.contact, true);
+                xmlhttp.open("GET", "http://127.0.0.1:5555/message/" + app.username, true);
                 xmlhttp.send();
             }
-    }, 500);
+    }, 1000);
 
     setInterval(
         function () {
@@ -73,7 +75,7 @@ window.addEventListener('WebComponentsReady', function() {
                 var contacts = JSON.parse(xmlhttp.responseText);
                 contacts.forEach(function(contact){
                     contact = JSON.parse(contact);
-                    if(!(contact.uuid in app.msgs)){
+                    if(!(contact.uuid in app.msgs) && contact.uuid != app.username){
                         app.msgs[contact.uuid] = [];
                         var template = document.querySelector("#contactList");
                         template.push('items', contact);
@@ -83,6 +85,6 @@ window.addEventListener('WebComponentsReady', function() {
             }
             xmlhttp.open("GET", "http://127.0.0.1:5555/contact", true);
             xmlhttp.send();
-    }, 3000);
+    }, 2000);
 
 });
