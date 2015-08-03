@@ -99,33 +99,33 @@ A single user list with a username, avatar, and desc.
       properties: {
 		avatar: {
           type: String,
-          value: "",
+          value: '',
           notify: false,
         },
 		username: {
           type: String,
-          value: "",
+          value: '',
           notify: false,
         },
 		statusmsg: {
           type: String,
-          value: "",
+          value: '',
           notify: false,
         },
 		status: {
           type: String,
-          value: "offline",
+          value: 'offline',
           notify: true,
         },
 		pending: {
           type: String,
-          value: "",
+          value: '',
           notify: true,
         }
       },
       setAvatar: function(avatar) {return 'background-image: url( '+ avatar + ')';},
 	  setStatus: function(status) {return 'status '+ status;},
-	  setPendingClass: function(pending) {if(pending != undefined){return 'pending'}else{return '';}}
+	  setPendingClass: function(pending) {if(pending !== undefined){return 'pending';}else{return '';}}
 	});
   })();
 </script>

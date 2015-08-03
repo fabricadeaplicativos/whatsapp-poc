@@ -141,8 +141,8 @@ A single user list with a username, avatar, and desc.
   (function () {
     Polymer({
       is: 'paper-chat',
-      setAvatarClass: function(avatar) {if(avatar != undefined){return 'avatar';}else{return '';}},
-      setAvatar: function(avatar) {if(avatar != undefined){return avatar;}else{return '';}},
+      setAvatarClass: function(avatar) {if(avatar !== undefined){return 'avatar';}else{return '';}},
+      setAvatar: function(avatar) {if(avatar !== undefined){return avatar;}else{return '';}},
       properties: {
 		whospeaks: {
           type: String,
